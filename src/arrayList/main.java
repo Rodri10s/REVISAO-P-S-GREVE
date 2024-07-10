@@ -84,7 +84,7 @@ public class main {
         String nomeEmpresa = scan.nextLine();
 
         int posicao = buscarEmpresa(nomeEmpresa, empresa);
-        if (posicao == 0) {
+        if (posicao == -1) {
             System.out.println("\nA Empresa Informada não existe no nosso banco de dados. Insira agora!");
             cadastrarEmpresa(scan, empresa);
             funcionario.setEmpresa(empresa.get(empresa.size() - 1));
@@ -103,7 +103,7 @@ public class main {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     public static void cadastrarEmpresa(Scanner scan, ArrayList<Empresa> lista) {
