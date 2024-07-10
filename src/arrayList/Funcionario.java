@@ -1,3 +1,5 @@
+package arrayList;
+
 public class Funcionario {
     private String nome;
     private String cpf;
@@ -47,7 +49,8 @@ public class Funcionario {
 
     @Override
     public String toString() {
-        return "Funcionario [nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", telefone=" + telefone + "]";
+        return "\nFuncionario [ nome=" + nome + ", cpf=" + cpf + ", rg=" + rg + ", telefone=" + telefone + ", empresa="
+                + empresa.getNome() + "]\n";
     }
 
 }

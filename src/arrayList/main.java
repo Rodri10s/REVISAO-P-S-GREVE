@@ -1,3 +1,5 @@
+package arrayList;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,19 +18,19 @@ public class main {
 
             switch (opcao) {
                 case 1: {
-                    cadastrarFuncionario(scan, listaFuncionario);
-                    break;
-                }
-                case 2: {
                     cadastrarEmpresa(scan, listaEmpresa);
                     break;
                 }
+                case 2: {
+                    cadastrarFuncionario(scan, listaFuncionario, listaEmpresa);
+                    break;
+                }
                 case 3: {
-                    listarFuncionario(listaFuncionario);
+                    listarEmpresa(listaEmpresa);
                     break;
                 }
                 case 4: {
-                    listarEmpresa(listaEmpresa);
+                    listarFuncionario(listaFuncionario);
                     break;
                 }
             }
@@ -43,10 +45,10 @@ public class main {
         while (!entradaValida) {
 
             System.out.println("Digite a opção desejada:");
-            System.out.println("01 : Adicionar Funcionário");
-            System.out.println("02 : Adicionar Empresa");
-            System.out.println("03 : Listar Funcionários");
-            System.out.println("04 : Listar Empresas");
+            System.out.println("01 : Adicionar Empresa");
+            System.out.println("02 : Adicionar Funcionário");
+            System.out.println("03 : Listar Empresas");
+            System.out.println("04 : Listar Funcionários");
             System.out.println("00 : Sair");
 
             try {
@@ -65,7 +67,7 @@ public class main {
         return opcao;
     }
 
-    public static void cadastrarFuncionario(Scanner scan, ArrayList<Funcionario> lista) {
+    public static void cadastrarFuncionario(Scanner scan, ArrayList<Funcionario> lista, ArrayList<Empresa> empresa) {
         System.out.println("\nInserir as informações do Funcionário:");
 
         Funcionario funcionario = new Funcionario();
@@ -78,10 +80,30 @@ public class main {
         funcionario.setTelefone(scan.nextLine());
         System.out.println("RG: ");
         funcionario.setRg(scan.nextLine());
+        System.out.println("Nome da Empresa: ");
+        String nomeEmpresa = scan.nextLine();
+
+        int posicao = buscarEmpresa(nomeEmpresa, empresa);
+        if (posicao == 0) {
+            System.out.println("\nA Empresa Informada não existe no nosso banco de dados. Insira agora!");
+            cadastrarEmpresa(scan, empresa);
+            funcionario.setEmpresa(empresa.get(empresa.size() - 1));
+        } else {
+            funcionario.setEmpresa(empresa.get(posicao));
+        }
 
         lista.add(funcionario);
 
         System.out.println("\nFuncionário adicionado com sucesso!\n");
+    }
+
+    public static int buscarEmpresa(String empresa, ArrayList<Empresa> listaEmpresa) {
+        for (int i = 0; i < listaEmpresa.size(); i++) {
+            if (listaEmpresa.get(i).getNome().equalsIgnoreCase(empresa)) {
+                return i;
+            }
+        }
+        return 0;
     }
 
     public static void cadastrarEmpresa(Scanner scan, ArrayList<Empresa> lista) {

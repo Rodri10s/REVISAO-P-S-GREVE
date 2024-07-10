@@ -1,3 +1,5 @@
+package arrayList;
+
 public class Empresa {
     private String cnpj;
     private String nome;
@@ -29,7 +31,7 @@ public class Empresa {
 
     @Override
     public String toString() {
-        return "Empresa [ nome=" + nome + " cnpj=" + cnpj + ", telefone=" + telefone + "]";
+        return "\nEmpresa [ nome=" + nome + " cnpj=" + cnpj + ", telefone=" + telefone + "]\n";
     }
 
 }
